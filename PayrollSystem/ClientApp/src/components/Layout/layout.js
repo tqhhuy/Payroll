@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
-import Sidebar from '../Sidebar/Sidebar.js';
+import Sidebar from '../Sidebar/sidebar.js';
 import Nvarbar from '../Nvarbar/Nvarbar.js';
 import { Switch, Route } from "react-router-dom";
 // import routes from "routes.js";
@@ -9,9 +9,9 @@ import { Switch, Route } from "react-router-dom";
         return (
             <>
             <div className="wrapper">
-                <Sidebar dataFromParent={props.dataFromParent}/>
+                <Sidebar name={props.name}/>
                 <div className="main-panel">
-                        <Nvarbar dataFromParent={props.dataFromParent}/>
+                        <Nvarbar isSignIn={props.isSignedIn}/>
                     <div id="content">
                         <Container>
                             {props.children}

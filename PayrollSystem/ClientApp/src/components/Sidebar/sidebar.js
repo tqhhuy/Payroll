@@ -25,7 +25,7 @@ function Sidebar(props) {
                         href="#infor"
                         onClick={() => setIsCollapse(!isCollapse)}
                     >
-                        <span className="text-left">{props.dataFromParent}</span>
+                        <span className="text-left">{props.name}</span>
                         <i className="arrow down"></i>
                     </a>
                     <div className={isCollapse ? "content-parent show" : "content-parent"}>

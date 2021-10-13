@@ -21,7 +21,7 @@ const uiConfig = {
 
 function SignIn() {
   return (
-      <div class="row">
+      <div className="row">
           <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
       </div>
   );

@@ -31,11 +31,11 @@ function App() {
     // Listen to the Firebase Auth state and set the local state.
     // Handle firebase auth change
     const [isSignedIn, setIsSignedIn] = useState(false);
-    const [name, setName] = useState(''); // Local signed-in state.
+    const [name, setName] = useState('User#001'); // Local signed-in state.
     useEffect(() => {
         const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
-            console.log('Logged in user: ', user.displayName);
-            setName(user.displayName)
+            console.log('Logged in user: ', user.getIdToken(true));
+            setName(user.displayame);
             setIsSignedIn(!!user);
             
         });
@@ -44,8 +44,8 @@ function App() {
     return (
         <div className="App">
             <Suspense fallback={<div>Loading ...</div>}>
-                <BrowserRouter>
-                <Layout dataFromParent={name}>
+                <BrowserRouter >
+                <Layout name={name} isSignedIn={isSignedIn}>
                     <Switch>
                             {/*<Route exact path='/' component={SignIn} />*/}
                         {<Route exact path='/' component={Home} />}

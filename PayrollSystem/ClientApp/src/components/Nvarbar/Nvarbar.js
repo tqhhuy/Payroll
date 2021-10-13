@@ -1,8 +1,22 @@
-import React, { Component } from "react";
+import React, { Component,useEffect,useState } from "react";
 import { Button } from "reactstrap";
 import SignIn from '../../auth/Signin';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 function Nvarbar(props) {
 
+    const [isSignedIn, setIsSignedIn] = useState(false);
+    useEffect(() => {
+        setIsSignedIn(props.isSignIn)
+    })
+    const auth = firebase.auth();
+    function logout() {
+    auth.signOut().then(() => {
+        console.log("Singout");
+    })
+    }
     return (
         <>
             <nav className="navbar navbar-expand-sm bg-light navbar-light">
@@ -16,12 +30,12 @@ function Nvarbar(props) {
                             </div>
                         </form>
                     </div>
-                    {props.dataFromParent !== null && (
-                        <button className="btn-primary">
+                    {isSignedIn == true && (
+                        <button id="logout" className="btn-primary" onClick= {logout()}>
                             Logout
                         </button>
                     )}
-                    {props.dataFromParent === null && (
+                    {isSignedIn == false && (
                         <SignIn />
                     )}
 
