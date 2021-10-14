@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
+
 function Home(){
+    
 return (
     <>
         <div className='home-container'>

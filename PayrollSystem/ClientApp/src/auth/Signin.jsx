@@ -34,22 +34,30 @@ const uiConfig = {
 
 function SignIn(props) {
   const [name, setName] = useState(false);
+  var tokenTxt ='';
+  //const [tokenID, setTokenID] = useState("Hello");
   const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
   // Listen to the Firebase Auth state and set the local state.
   useEffect(() => {
-    const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
+    const unregisterAuthObserver = firebase.auth().onAuthStateChanged(   async (user) => {
+      if (!user){
+        console.log('User is not login');
+        return
+      }
+      
       setIsSignedIn(!!user);
       
     });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);
-
   if (!isSignedIn) {
     return (
+      <>
       <div>
         <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+        </div>
         
-      </div>
+        </>
     );
   }
   return (
@@ -60,6 +68,7 @@ function SignIn(props) {
       {/* <p> {firebase.auth().currentUser.displayName}</p> */}
     </div>
   );
+  
 }
 
 export default SignIn;

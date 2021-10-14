@@ -3,6 +3,10 @@ import { Button } from "reactstrap";
 import SignIn from '../../auth/Signin';
 
 function Nvarbar(props) {
+    const [tokenID,setToken] = useState("123");
+    const TokenID = (text) => {
+        setToken(text)
+    }
 
     return (
         <>
@@ -17,11 +21,10 @@ function Nvarbar(props) {
                             </div>
                         </form>
                     </div>
-                   
-                    <SignIn />
-
+                    <SignIn tokenID ={TokenID}/>
                 </div>
             </nav>
+            <di>{tokenID}</di>
         </>
     );
 };
