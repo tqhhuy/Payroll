@@ -23,33 +23,35 @@ function App() {
     const [name, setName] = useState('User#001'); // Local signed-in state.
     const [companyList,setCompanyList] = useState([]);
     var tokenTxt ='';
+    const [TKID,setTKID] = useState('');
+    useEffect(()=> {
+        const fetchCompany = () => {
+            var id ='1';
+                const response = CompanyApi.getAll(id);
+                console.log('Company: ',response);
+            
+        }
+    fetchCompany();
+    },[]);
     useEffect(() => {
         const unregisterAuthObserver = firebase.auth().onAuthStateChanged(   async (user) => {
           if (!user){
             console.log('User is not login');
             return
           }
-          console.log('Logged in user: ', user.displayName);
+          const username = user.displayName;
+          setName(username);
+          console.log('Logged in user: ', name);
            tokenTxt =  (await user.getIdToken());
           console.log('Logged in user Token: ',tokenTxt);
-          const response = await Authorise.getAll(tokenTxt);
+          setTKID(tokenTxt);
+          const response = await Authorise.getTokenAuthen(tokenTxt);
           console.log(response);
+          
         });
         return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
       }, []);
-    useEffect(() => {
-        const fetchCompanyList = async() => {
-            try{
-                const response = await CompanyApi.getAll();
-                console.log(response);
-                console.log('Hello api');
-            }
-            catch (error){
-                console.log('Fail',error);
-            }
-            fetchCompanyList();
-        }
-    },[]);
+    
     return (
         <div className="App">
             <Suspense fallback={<div>Loading ...</div>}>

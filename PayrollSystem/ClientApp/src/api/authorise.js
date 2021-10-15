@@ -1,7 +1,7 @@
 import axiosClient from "./axiosClient";
 
 const Authorise = {
-    getAll:(param) => {
+    getTokenAuthen:(param) => {
         const url = `/accounts/login?token=${param}`;
         return axiosClient.get(url);
     }
